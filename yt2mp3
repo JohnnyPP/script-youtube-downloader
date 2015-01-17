@@ -1,0 +1,21 @@
+#!/bin/bash
+
+x=/tmp/YTdownload.mp4				# temp file in which the data are downloaded
+
+youtube-dl --output=$x --format=18 "$1"		# download the file in highest quality [--format=18]
+
+avconv -i $x -vn -c:a libmp3lame -q:a 4 "$2"	# convert the donwnloaded file from mp4 to mp3 
+
+if [ "$3" = "send" ]; then			# send the file to rpi only if needed
+
+	rsync --append-verify --progress "$2" --rsh="ssh -p 32972" pi@rpi105:mp3/yt/"$2"
+
+fi
+
+rm $x						# remove the temp file
+
+# if you get "ERROR: unable to download video" 
+# update youtube-dl with
+# sudo youtube-dl -U
+# sudo install yt2mp3 /usr/local/bin
+
