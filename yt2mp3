@@ -8,6 +8,11 @@ avconv -i $x -vn -c:a libmp3lame -q:a 4 "$2"	# convert the donwnloaded file from
 
 rm $x						# remove the temp file
 
+# sudo apt-get install python3-pip
+# sudo pip3 install --upgrade youtube_dl
+# sudo add-apt-repository ppa:heyarje/libav-11 && sudo apt-get update
+# sudo apt-get install libav-tools
+
 # if you get "ERROR: unable to download video" 
 # update youtube-dl with
 # sudo youtube-dl -U
